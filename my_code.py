@@ -1,4 +1,4 @@
-# Collaborators (including web sites where you got help: (enter none if you didn't need help)
+# Collaborators (including web sites where you got help: https://www.w3schools.com/python/default.asp
 #  
 # A note on style: Dictionaries can be defined before or after functions.
 import random
