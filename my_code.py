@@ -20,31 +20,81 @@ def go_first(player_1, player_2):
         if turn == random_int:
             print (player_1, "(X) go first and " + player_2 + " (O) go second")
         elif turn != random_int:#seems like any number other then 1 or 2 also count as a number different from the random_int
-            print (player_2, "(O) go first and " + player_1 + " (X) go second")
+            print (player_2, "(X) go first and " + player_1 + " (O) go second")
     except:
         print ("Please either type 1 or 2")
         go_first(player_1, player_2)
 
-def strike():
+def strike_X():#strike and win
     print ("Here are the options for your strike's position:")
     print (position)
     x = input("Which position do you want to strike?: ")
     position.remove(x)
-    print (player_1, "is X and " + player_2, "is O")
-    y = input("What is your symbol (X or O)?: ")
-    board[x] = y
+    board[x] = 'X'
     tictactoe(board)
-    strike()
-    
-def win():
-    strike()
-    if board['TL'] == 'X' and board['TM'] == 'X' and board['TR'] == 'X':#WHY NOT STOP
-        print (player_1, "win!")
+    if board['TL'] == 'X' and board['TM'] == 'X' and board['TR'] == 'X':#Side top
+        print (player_1, "won!")
         exit()
+    if board['ML'] == 'X' and board['M'] == 'X' and board['MR'] == 'X':#Side mid
+        print (player_1, "won!")
+        exit()
+    if board['BL'] == 'X' and board['BM'] == 'X' and board['BR'] == 'X':#Side bot
+        print (player_1, "won!")
+        exit()
+    if board['TL'] == 'X' and board['ML'] == 'X' and board['BL'] == 'X':#Down left
+        print (player_1, "won!")
+        exit()
+    if board['TM'] == 'X' and board['M'] == 'X' and board['BM'] == 'X':#Down mid
+        print (player_1, "won!")
+        exit()
+    if board['TR'] == 'X' and board['MR'] == 'X' and board['BR'] == 'X':#Down right
+        print (player_1, "won!")
+        exit()
+    if board['TL'] == 'X' and board['M'] == 'X' and board['BR'] == 'X':#Cross
+        print (player_1, "won!")
+        exit()
+    if board['TR'] == 'X' and board['M'] == 'X' and board['BL'] == 'X':#Cross
+        print (player_1, "won!")
+        exit()
+    else:
+        strike_O()
     
+    def strike_O():#strike and win
+    print ("Here are the options for your strike's position:")
+    print (position)
+    x = input("Which position do you want to strike?: ")
+    position.remove(x)
+    board[x] = 'O'
+    tictactoe(board)
+    if board['TL'] == 'O' and board['TM'] == 'O' and board['TR'] == 'O':#Side top
+        print (player_1, "won!")
+        exit()
+    if board['ML'] == 'O' and board['M'] == 'O' and board['MR'] == 'O':#Side mid
+        print (player_1, "won!")
+        exit()
+    if board['BL'] == 'O' and board['BM'] == 'O' and board['BR'] == 'O':#Side bot
+        print (player_1, "won!")
+        exit()
+    if board['TL'] == 'O' and board['ML'] == 'O' and board['BL'] == 'O':#Down left
+        print (player_1, "won!")
+        exit()
+    if board['TM'] == 'O' and board['M'] == 'O' and board['BM'] == 'O':#Down mid
+        print (player_1, "won!")
+        exit()
+    if board['TR'] == 'O' and board['MR'] == 'O' and board['BR'] == 'O':#Down right
+        print (player_1, "won!")
+        exit()
+    if board['TL'] == 'O' and board['M'] == 'O' and board['BR'] == 'O':#Cross
+        print (player_1, "won!")
+        exit()
+    if board['TR'] == 'O' and board['M'] == 'O' and board['BL'] == 'O':#Cross
+        print (player_1, "won!")
+        exit()
+    else:
+        strike_X()
+
 
 player_1 = input("Player 1, please type your name here: ")
 player_2 = input("Player 2, please type your name here: ")
 go_first(player_1,player_2)
-win()
-
+strike_X()
