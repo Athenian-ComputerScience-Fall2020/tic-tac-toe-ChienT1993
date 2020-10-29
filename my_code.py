@@ -19,18 +19,19 @@ def go_first(player_1, player_2):
         turn = int(input(player_1 + " choose either 1 or 2: "))
         if turn == random_int:
             print (player_1, "(X) go first and " + player_2 + " (O) go second")
-        elif turn != random_int:#seems like any number other then 1 or 2 also count as a number different from the random_int
+        elif turn != random_int and turn < 3:#seems like any number other then 1 or 2 also count as a number different from the random_int
             print (player_2, "(X) go first and " + player_1 + " (O) go second")
     except:
         print ("Please either type 1 or 2")
         go_first(player_1, player_2)
 
-def strike_X():#strike and win
+def strike_X(strikes):#strike and win
     print ("Here are the options for your strike's position:")
     print (position)
     x = input("Which position do you want to strike?: ")
     position.remove(x)
     board[x] = 'X'
+    strikes = strikes + 1
     tictactoe(board)
     if board['TL'] == 'X' and board['TM'] == 'X' and board['TR'] == 'X':#Side top
         print (player_1, "won!")
@@ -56,15 +57,19 @@ def strike_X():#strike and win
     if board['TR'] == 'X' and board['M'] == 'X' and board['BL'] == 'X':#Cross
         print (player_1, "won!")
         exit()
+    if strikes == 9:
+        print ("It's a tie!")
+        exit()
     else:
-        strike_O()
+        strike_O(strikes)
     
-    def strike_O():#strike and win
+def strike_O(strikes):#strike and win
     print ("Here are the options for your strike's position:")
     print (position)
     x = input("Which position do you want to strike?: ")
     position.remove(x)
     board[x] = 'O'
+    strikes = strikes + 1
     tictactoe(board)
     if board['TL'] == 'O' and board['TM'] == 'O' and board['TR'] == 'O':#Side top
         print (player_1, "won!")
@@ -90,11 +95,14 @@ def strike_X():#strike and win
     if board['TR'] == 'O' and board['M'] == 'O' and board['BL'] == 'O':#Cross
         print (player_1, "won!")
         exit()
+    if strikes == 9:
+        print ("It's a tie!")
+        exit()
     else:
-        strike_X()
+        strike_X(strikes)
 
-
+strikes = 0
 player_1 = input("Player 1, please type your name here: ")
 player_2 = input("Player 2, please type your name here: ")
 go_first(player_1,player_2)
-strike_X()
+strike_X(strikes)
